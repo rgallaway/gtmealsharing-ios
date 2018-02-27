@@ -1,0 +1,6 @@
+framework module Pods_MealSharing {
+  umbrella header "Pods-MealSharing-umbrella.h"
+
+  export *
+  module * { export * }
+}
