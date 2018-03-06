@@ -12,6 +12,9 @@
 		798036FC2044EE4F0051C1D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 798036FB2044EE4F0051C1D0 /* GoogleService-Info.plist */; };
 		798036FD2044EE4F0051C1D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 798036FB2044EE4F0051C1D0 /* GoogleService-Info.plist */; };
 		798036FE2044EE4F0051C1D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 798036FB2044EE4F0051C1D0 /* GoogleService-Info.plist */; };
+		79923EBB204F39D90099053D /* SwipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79923EBA204F39D90099053D /* SwipeTableViewCell.swift */; };
+		79923EBD204F454F0099053D /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79923EBC204F454F0099053D /* SwipeTableViewController.swift */; };
+		79923EBF204F45A30099053D /* Swipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79923EBE204F45A20099053D /* Swipe.swift */; };
 		79DCCADF2040C5D20035CEBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DCCADE2040C5D20035CEBB /* AppDelegate.swift */; };
 		79DCCAE12040C5D20035CEBB /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DCCAE02040C5D20035CEBB /* FirstViewController.swift */; };
 		79DCCAE32040C5D20035CEBB /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DCCAE22040C5D20035CEBB /* SecondViewController.swift */; };
@@ -47,6 +50,9 @@
 		5AF55296D80BA718DDAE65B0 /* Pods_MealSharingUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MealSharingUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AE706114D544E05C5C767D9 /* Pods-MealSharingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MealSharingUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MealSharingUITests/Pods-MealSharingUITests.release.xcconfig"; sourceTree = "<group>"; };
 		798036FB2044EE4F0051C1D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		79923EBA204F39D90099053D /* SwipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewCell.swift; sourceTree = "<group>"; };
+		79923EBC204F454F0099053D /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
+		79923EBE204F45A20099053D /* Swipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swipe.swift; sourceTree = "<group>"; };
 		79DCCADB2040C5D20035CEBB /* MealSharing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MealSharing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79DCCADE2040C5D20035CEBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79DCCAE02040C5D20035CEBB /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -147,8 +153,11 @@
 				798036FB2044EE4F0051C1D0 /* GoogleService-Info.plist */,
 				79DCCB0E2040C6250035CEBB /* MealSharing.entitlements */,
 				79DCCADE2040C5D20035CEBB /* AppDelegate.swift */,
+				79923EBE204F45A20099053D /* Swipe.swift */,
 				79DCCAE02040C5D20035CEBB /* FirstViewController.swift */,
 				79DCCAE22040C5D20035CEBB /* SecondViewController.swift */,
+				79923EBC204F454F0099053D /* SwipeTableViewController.swift */,
+				79923EBA204F39D90099053D /* SwipeTableViewCell.swift */,
 				79DCCAE42040C5D20035CEBB /* Main.storyboard */,
 				79DCCAE72040C5D20035CEBB /* Assets.xcassets */,
 				79DCCAE92040C5D20035CEBB /* LaunchScreen.storyboard */,
@@ -525,9 +534,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79923EBF204F45A30099053D /* Swipe.swift in Sources */,
 				79DCCAE32040C5D20035CEBB /* SecondViewController.swift in Sources */,
 				79DCCADF2040C5D20035CEBB /* AppDelegate.swift in Sources */,
+				79923EBB204F39D90099053D /* SwipeTableViewCell.swift in Sources */,
 				79DCCAE12040C5D20035CEBB /* FirstViewController.swift in Sources */,
+				79923EBD204F454F0099053D /* SwipeTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
