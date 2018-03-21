@@ -12,14 +12,13 @@ import FirebaseAuthUI
 import FirebaseGoogleAuthUI
 
 class FirstViewController: UIViewController, FUIAuthDelegate {
-    
-    @IBOutlet weak var accountLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         Auth.auth().addStateDidChangeListener { auth, user in
+            weak var weakSelf = self
             if user != nil {
-                self.accountLabel.text = "Signed in as " + user!.email!
+                weakSelf!.performSegue(withIdentifier: "showMainScreen", sender: self)
             } else {
                 self.login()
             }
@@ -49,13 +48,10 @@ class FirstViewController: UIViewController, FUIAuthDelegate {
         // other URL handling goes here.
         return false
     }
-    @IBAction func signOut(_ sender: Any) {
-        try! Auth.auth().signOut()
-    }
     
     func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
         if (user != nil) {
-            self.accountLabel.text = "Signed in as " + user!.email!
+            performSegue(withIdentifier: "showMainScreen", sender: self)
         } else if (error != nil) {
             self.login()
         }

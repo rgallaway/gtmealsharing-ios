@@ -7,22 +7,30 @@
 //
 
 import UIKit
+import Firebase
 
 class Swipe {
     //MARK: Properties
+    var is_swipe: Bool
     var cur_num_swipes: Int
-    var end_date: NSDate
+    var end_date: Date
     var price: Double
-    var start_date: NSDate
+    var start_date: Date
     var start_num_swipes: Int
+    var location: DocumentReference
+    var user: DocumentReference
     
     //MARK: Initialization
-    init(cur_num_swipes: Int, end_date: NSDate, price: Double,
-         start_date: NSDate, start_num_swipes: Int) {
+    init(is_swipe: Bool, cur_num_swipes: Int, end_date: Date, price: Double,
+         start_date: Date, start_num_swipes: Int, location: DocumentReference,
+         user: DocumentReference) {
+        self.is_swipe = is_swipe
         self.cur_num_swipes = cur_num_swipes
         self.end_date = end_date
         self.price = price
         self.start_date = start_date
         self.start_num_swipes = start_num_swipes
+        self.location = location
+        self.user = user
     }
 }

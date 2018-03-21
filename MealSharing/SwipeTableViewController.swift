@@ -7,13 +7,29 @@
 //
 
 import UIKit
+import Firebase
 
 class SwipeTableViewController: UITableViewController {
     //MARK: Properties
+    var swipes = [Swipe]()
+    var db: Firestore!
+    let formatter = DateFormatter()
     
+    @IBOutlet var swipeTableView: UITableView!
+    
+    override lazy var refreshControl: UIRefreshControl? = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(SwipeTableViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor.gray
+        return refreshControl
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        db = Firestore.firestore()
+        formatter.dateFormat = "E, MMM d, h:mm a"
+        self.swipeTableView.addSubview(self.refreshControl!)
+        handleRefresh(self.refreshControl!)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -30,24 +46,58 @@ class SwipeTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        print("numberOfRowsInSection = \(swipes.count)")
+        return swipes.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        print("In cellForRowAtIndexPath")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SwipeTableViewCell", for: indexPath) as? SwipeTableViewCell
+            else {
+                fatalError("Dequeued cell is not an instance of SwipeTableViewCell")
+        }
+        let swipe = swipes[indexPath.row]
+        let amountString = String(format: "$%.02f", swipe.price)
+        cell.typeLabel.text = swipe.is_swipe ? "S" : "D"
+        cell.amountLabel.text = "\(swipe.cur_num_swipes) swipes @ \(amountString) ea."
+        cell.elapsedTimeLabel.text = swipe.start_date.timeAgoSinceNow(useNumericDates: true)
+        swipe.location.getDocument(completion: {(querySnapshot, err) in
+            if let err = err {
+                print("Error getting document: \(err)")
+            } else {
+                cell.locationLabel.text = querySnapshot?.data()!["name"] as? String
+            }
+        })
         return cell
     }
-    */
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        swipes.removeAll()
+        db.collection("swipes").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let swipeData = document.data()
+                    print(swipeData)
+                    let swipe = Swipe(is_swipe: swipeData["is_swipe"] as! Bool,
+                                      cur_num_swipes: swipeData["cur_num_swipes"] as! Int, end_date: swipeData["end_date"] as! Date,
+                                      price: swipeData["price"] as! Double, start_date: swipeData["start_date"] as! Date,
+                                      start_num_swipes: swipeData["start_num_swipes"] as! Int, location: swipeData["location"] as! DocumentReference,
+                                      user: swipeData["user"] as! DocumentReference)
+                    self.swipes.append(swipe)
+                    print("should have \(self.swipes.count) rows")
+                }
+                print("actually has \(self.swipes.count) rows")
+                self.swipeTableView.reloadData()
+                refreshControl.endRefreshing()
+            }
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
