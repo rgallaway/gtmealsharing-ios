@@ -90,7 +90,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Available Swipes" id="SyB-Qm-yLt">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="rqr-e6-wMq"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="rqr-e6-wMq">
+                            <connections>
+                                <segue destination="Yac-oS-Epe" kind="show" id="6JJ-eY-1Qg"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="swipeTableView" destination="z6t-L1-QsY" id="pUf-R6-dbE"/>
@@ -99,6 +103,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ud8-jO-jpl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1698.4000000000001" y="-349.47526236881561"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="hxO-6q-1Bv">
+            <objects>
+                <viewController id="Yac-oS-Epe" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ueb-uO-zgp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fed-if-o9R">
+                                <rect key="frame" x="16" y="88" width="343" height="641"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="pYN-d4-6D1"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HWL-zF-EWg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2591.1999999999998" y="-349.50738916256159"/>
         </scene>
         <!--Swipes-->
         <scene sceneID="JZJ-Zz-add">
