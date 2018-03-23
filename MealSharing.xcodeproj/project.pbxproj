@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1A7A9D8FC75724F134AA6531 /* Pods_MealSharingUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF55296D80BA718DDAE65B0 /* Pods_MealSharingUITests.framework */; };
 		2437BB2D08D2E471DDF5E09A /* Pods_MealSharingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33845600266EE3B196EC15E3 /* Pods_MealSharingTests.framework */; };
+		794AE97B2064538B0073BD67 /* AddSwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794AE97A2064538B0073BD67 /* AddSwipeViewController.swift */; };
 		798036FC2044EE4F0051C1D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 798036FB2044EE4F0051C1D0 /* GoogleService-Info.plist */; };
 		798036FD2044EE4F0051C1D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 798036FB2044EE4F0051C1D0 /* GoogleService-Info.plist */; };
 		798036FE2044EE4F0051C1D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 798036FB2044EE4F0051C1D0 /* GoogleService-Info.plist */; };
@@ -50,6 +51,7 @@
 		3DDF92DF1053426AA590CEF7 /* Pods_MealSharing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MealSharing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AF55296D80BA718DDAE65B0 /* Pods_MealSharingUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MealSharingUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AE706114D544E05C5C767D9 /* Pods-MealSharingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MealSharingUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MealSharingUITests/Pods-MealSharingUITests.release.xcconfig"; sourceTree = "<group>"; };
+		794AE97A2064538B0073BD67 /* AddSwipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSwipeViewController.swift; sourceTree = "<group>"; };
 		798036FB2044EE4F0051C1D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		79923EBA204F39D90099053D /* SwipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewCell.swift; sourceTree = "<group>"; };
 		79923EBC204F454F0099053D /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				79B8C7A02061E99B005F1FB9 /* DateHelpers.swift */,
 				79923EBA204F39D90099053D /* SwipeTableViewCell.swift */,
 				79DCCAE42040C5D20035CEBB /* Main.storyboard */,
+				794AE97A2064538B0073BD67 /* AddSwipeViewController.swift */,
 				79DCCAE72040C5D20035CEBB /* Assets.xcassets */,
 				79DCCAE92040C5D20035CEBB /* LaunchScreen.storyboard */,
 				79DCCAEC2040C5D20035CEBB /* Info.plist */,
@@ -544,6 +547,7 @@
 				79923EBB204F39D90099053D /* SwipeTableViewCell.swift in Sources */,
 				79DCCAE12040C5D20035CEBB /* FirstViewController.swift in Sources */,
 				79923EBD204F454F0099053D /* SwipeTableViewController.swift in Sources */,
+				794AE97B2064538B0073BD67 /* AddSwipeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
