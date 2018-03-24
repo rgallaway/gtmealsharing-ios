@@ -134,7 +134,7 @@ class SwipeTableViewController: UITableViewController {
     }
     */
 
-    
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -145,5 +145,6 @@ class SwipeTableViewController: UITableViewController {
             navigationItem.title = nil
         }
     }
+    */
 
 }
