@@ -62,8 +62,13 @@ class SwipeTableViewController: UITableViewController {
         }
         let swipe = swipes[indexPath.row]
         let amountString = String(format: "$%.02f", swipe.price)
-        cell.typeLabel.text = swipe.is_swipe ? "S" : "D"
-        cell.amountLabel.text = "\(swipe.cur_num_swipes) swipes @ \(amountString) ea."
+        if swipe.is_swipe {
+            cell.typeLabel.text = "S"
+            cell.amountLabel.text = "\(swipe.cur_num_swipes!) swipes @ \(amountString) ea."
+        } else {
+            cell.typeLabel.text = "D"
+            cell.amountLabel.text = "Dining Points: \(amountString)"
+        }
         cell.elapsedTimeLabel.text = swipe.start_date.timeAgoSinceNow(useNumericDates: true)
         swipe.location.getDocument(completion: {(querySnapshot, err) in
             if let err = err {
@@ -85,9 +90,9 @@ class SwipeTableViewController: UITableViewController {
                     let swipeData = document.data()
                     print(swipeData)
                     let swipe = Swipe(is_swipe: swipeData["is_swipe"] as! Bool,
-                                      cur_num_swipes: swipeData["cur_num_swipes"] as! Int, end_date: swipeData["end_date"] as! Date,
+                                      cur_num_swipes: swipeData["cur_num_swipes"] as? Int, end_date: swipeData["end_date"] as! Date,
                                       price: swipeData["price"] as! Double, start_date: swipeData["start_date"] as! Date,
-                                      start_num_swipes: swipeData["start_num_swipes"] as! Int, location: swipeData["location"] as! DocumentReference,
+                                      start_num_swipes: swipeData["start_num_swipes"] as? Int, location: swipeData["location"] as! DocumentReference,
                                       user: swipeData["user"] as! DocumentReference)
                     self.swipes.append(swipe)
                     print("should have \(self.swipes.count) rows")

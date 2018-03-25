@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 import FirebaseAuth
 import FirebaseAuthUI
 import FirebaseGoogleAuthUI
@@ -51,6 +52,11 @@ class FirstViewController: UIViewController, FUIAuthDelegate {
     
     func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
         if (user != nil) {
+            let db = Firestore.firestore()
+            db.collection("users").document((user?.uid)!).setData([
+                "email": user?.email,
+                "name": user?.displayName
+            ])
             performSegue(withIdentifier: "showMainScreen", sender: self)
         } else if (error != nil) {
             self.login()
