@@ -139,57 +139,27 @@ class AddSwipeViewController: UITableViewController {
     // This is going to be terrible and not very robust
     // Will need lots of clean-up for public release
     @IBAction func saveButtonClicked(_ sender: Any) {
-        let locationsRef = db.collection("locations")
         let locationCell = tableView.cellForRow(at: IndexPath(row: locationIndex, section: 2))
-        let query = locationsRef.whereField("name", isEqualTo: locationCell?.textLabel?.text)
-        var locationDoc: DocumentReference?
-        query.getDocuments() { (querySnapshot, err) in
+        var ref: DocumentReference? = nil
+        ref = self.db.collection("swipes").addDocument(data: [
+            "cur_num_swipes": Int(self.numSwipesField.text!),
+            "start_num_swipes": Int(self.numSwipesField.text!),
+            "price": Double(self.amountTextField.text!)!,
+            "start_date": Date(),
+            "end_date": self.dateStamp!,
+            "is_swipe": self.typeIndex == 0,
+            "location": locationCell?.textLabel?.text,
+            "user": (Auth.auth().currentUser?.uid)!
+        ]) { err in
             if let err = err {
-                print("Error getting location documents: \(err)")
-                locationDoc = nil
+                print("Error adding swipe to db: \(err)")
             } else {
-                print("Found location document")
-                locationDoc = querySnapshot!.documents[0].reference
-                var ref: DocumentReference? = nil
-                ref = self.db.collection("swipes").addDocument(data: [
-                    "cur_num_swipes": Int(self.numSwipesField.text!),
-                    "start_num_swipes": Int(self.numSwipesField.text!),
-                    "price": Double(self.amountTextField.text!)!,
-                    "start_date": Date(),
-                    "end_date": self.dateStamp!,
-                    "is_swipe": self.typeIndex == 0,
-                    "location": locationDoc,
-                    "user": self.db.collection("users").document((Auth.auth().currentUser?.uid)!)
-                ]) { err in
-                    if let err = err {
-                        print("Error adding swipe to db: \(err)")
-                    } else {
-                        print("Document added with ID: \(ref!.documentID)")
-                    }
-                }
-                if let navController = self.navigationController {
-                    navController.popViewController(animated: true)
-                }
+                print("Document added with ID: \(ref!.documentID)")
             }
         }
-        
-    }
-    
-    private func locationReference(forIndex index: Int) -> DocumentReference? {
-        let locationsRef = db.collection("locations")
-        let locationCell = tableView.cellForRow(at: IndexPath(row: index, section: 2))
-        let query = locationsRef.whereField("name", isEqualTo: locationCell?.textLabel?.text)
-        var doc: DocumentReference?
-        query.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting location documents: \(err)")
-                doc = nil
-            } else {
-                print("Found location document")
-                doc = querySnapshot!.documents[0].reference
-            }
+        if let navController = self.navigationController {
+            navController.popViewController(animated: true)
         }
-        return doc
     }
     
     /*

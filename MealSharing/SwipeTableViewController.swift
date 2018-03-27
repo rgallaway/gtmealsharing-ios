@@ -70,13 +70,7 @@ class SwipeTableViewController: UITableViewController {
             cell.amountLabel.text = "Dining Points: \(amountString)"
         }
         cell.elapsedTimeLabel.text = swipe.start_date.timeAgoSinceNow(useNumericDates: true)
-        swipe.location.getDocument(completion: {(querySnapshot, err) in
-            if let err = err {
-                print("Error getting document: \(err)")
-            } else {
-                cell.locationLabel.text = querySnapshot?.data()!["name"] as? String
-            }
-        })
+        cell.locationLabel.text = swipe.location
         return cell
     }
     
@@ -92,8 +86,8 @@ class SwipeTableViewController: UITableViewController {
                     let swipe = Swipe(is_swipe: swipeData["is_swipe"] as! Bool,
                                       cur_num_swipes: swipeData["cur_num_swipes"] as? Int, end_date: swipeData["end_date"] as! Date,
                                       price: swipeData["price"] as! Double, start_date: swipeData["start_date"] as! Date,
-                                      start_num_swipes: swipeData["start_num_swipes"] as? Int, location: swipeData["location"] as! DocumentReference,
-                                      user: swipeData["user"] as! DocumentReference)
+                                      start_num_swipes: swipeData["start_num_swipes"] as? Int, location: swipeData["location"] as! String,
+                                      user: swipeData["user"] as! String)
                     self.swipes.append(swipe)
                     print("should have \(self.swipes.count) rows")
                 }

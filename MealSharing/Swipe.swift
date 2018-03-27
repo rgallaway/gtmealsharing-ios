@@ -17,13 +17,13 @@ class Swipe {
     var price: Double
     var start_date: Date
     var start_num_swipes: Int?
-    var location: DocumentReference
-    var user: DocumentReference
+    var location: String
+    var user: String
     
     //MARK: Initialization
     init(is_swipe: Bool, cur_num_swipes: Int?, end_date: Date, price: Double,
-         start_date: Date, start_num_swipes: Int?, location: DocumentReference,
-         user: DocumentReference) {
+         start_date: Date, start_num_swipes: Int?, location: String,
+         user: String) {
         self.is_swipe = is_swipe
         self.cur_num_swipes = cur_num_swipes
         self.end_date = end_date
