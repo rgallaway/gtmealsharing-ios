@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class Swipe {
-    //MARK: Properties
+    // MARK: Properties
     var is_swipe: Bool
     var cur_num_swipes: Int?
     var end_date: Date
@@ -19,11 +19,12 @@ class Swipe {
     var start_num_swipes: Int?
     var location: String
     var user: String
+    var swipeId: String
     
-    //MARK: Initialization
+    // MARK: Initialization
     init(is_swipe: Bool, cur_num_swipes: Int?, end_date: Date, price: Double,
          start_date: Date, start_num_swipes: Int?, location: String,
-         user: String) {
+         user: String, swipeId: String) {
         self.is_swipe = is_swipe
         self.cur_num_swipes = cur_num_swipes
         self.end_date = end_date
@@ -32,5 +33,6 @@ class Swipe {
         self.start_num_swipes = start_num_swipes
         self.location = location
         self.user = user
+        self.swipeId = swipeId
     }
 }

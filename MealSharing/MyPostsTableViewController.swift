@@ -1,21 +1,20 @@
 //
-//  SwipeTableViewController.swift
+//  MyPostsTableViewController.swift
 //  MealSharing
 //
-//  Created by Ryan Gallaway on 3/6/18.
+//  Created by Ryan Gallaway on 4/5/18.
 //  Copyright © 2018 MealSharing. All rights reserved.
 //
 
 import UIKit
-import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 
-class SwipeTableViewController: UITableViewController {
-    //MARK: Properties
-    var swipes = [Swipe]()
+class MyPostsTableViewController: UITableViewController {
     var db: Firestore!
-    
-    @IBOutlet var swipeTableView: UITableView!
-    
+    var currentUser: User!
+    var swipes = [Swipe]()
+
     // define the pull-to-refresh object and connect to handleRefresh()
     override lazy var refreshControl: UIRefreshControl? = {
         let refreshControl = UIRefreshControl()
@@ -23,35 +22,36 @@ class SwipeTableViewController: UITableViewController {
         refreshControl.tintColor = UIColor.gray
         return refreshControl
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
-        self.swipeTableView.addSubview(self.refreshControl!)
+        currentUser = Auth.auth().currentUser
+        tableView.addSubview(self.refreshControl!)
         handleRefresh(self.refreshControl!)
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return swipes.count
     }
-
+    
     // Handles drawing dynamic cells -- each row must be populated with data from the database
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // this is required for Swift table view memory management
@@ -78,15 +78,15 @@ class SwipeTableViewController: UITableViewController {
     }
     
     /*
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    */
+     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     tableView.deselectRow(at: indexPath, animated: true)
+     }
+     */
     
     // Handles loading data from database and populating the swipes array
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         swipes.removeAll()
-        db.collection("swipes").getDocuments() { (querySnapshot, err) in
+        db.collection("swipes").whereField("user", isEqualTo: currentUser.uid).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -101,7 +101,7 @@ class SwipeTableViewController: UITableViewController {
                     self.swipes.append(swipe)
                 }
                 self.swipes.sort(by: { $0.start_date.compare($1.start_date) == .orderedDescending })
-                self.swipeTableView.reloadData()
+                self.tableView.reloadData()
                 refreshControl.endRefreshing()
             }
         }
@@ -142,16 +142,14 @@ class SwipeTableViewController: UITableViewController {
     }
     */
 
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    // Create instance of DetailsTableViewController and pass in data from currently-selected cell
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "showDetailsView") {
-            let destinationVC = segue.destination as! DetailsTableViewController
-            let docId = swipes[tableView.indexPathForSelectedRow!.row].swipeId;
-            print("Starting details view with id \(docId)")
-            destinationVC.swipeId = docId;
-        }
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
+    */
+
 }
